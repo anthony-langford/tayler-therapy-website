@@ -26,9 +26,13 @@ Open any HTML file directly in a browser. No server or build step required.
 
 Push to `main` — GitHub Pages deploys automatically.
 
-## DNS Configuration
+---
 
-Point the domain to GitHub Pages:
+## TODO
+
+### Configure DNS
+
+Update DNS records at your domain registrar to point to GitHub Pages:
 
 **A records** for `taylermiddleton.com`:
 ```
@@ -43,9 +47,29 @@ Point the domain to GitHub Pages:
 anthony-langford.github.io
 ```
 
----
+After DNS propagates (can take up to 48 hours):
+1. Go to repo Settings → Pages → Custom domain → enter `www.taylermiddleton.com`
+2. Check "Enforce HTTPS"
 
-## TODO
+### Configure Web3Forms
+
+1. Go to [web3forms.com](https://web3forms.com) dashboard
+2. **Verify `info@taylermiddleton.com`** — Web3Forms sends a verification email to confirm the address
+3. **Update the recipient email** to `info@taylermiddleton.com` so form submissions go to the practice inbox (not your personal email)
+4. Test the form on the live site to confirm submissions arrive
+
+### Fix Psychology Today Embed
+
+The current badge uses a partial SVG that only shows the checkmark and "VERIFIED BY" text. To get the full badge with the "Psychology Today" wordmark:
+
+1. Log in to the [Psychology Today member portal](https://member.psychologytoday.com/)
+2. Find the **verification badge** or **website widget** section
+3. Copy the full embed code — it will look like:
+   ```html
+   <a href="https://www.psychologytoday.com/profile/1148224" class="sx-verified-seal"></a>
+   <script type="text/javascript" src="https://member.psychologytoday.com/verified-seal.js" data-badge="16" data-id="1148224" data-code="YOUR_CODE"></script>
+   ```
+4. Replace the `<div class="footer__badge">` contents in all pages (`index.html`, `about.html`, `faq.html`, `contact.html`, `thanks.html`) with the full embed code
 
 ### Replace Placeholder Images
 
@@ -94,16 +118,37 @@ Create `images/og-image.jpg` (1200x630px recommended). This image appears when t
 4. **Submit sitemap** → Sitemaps → enter `https://www.taylermiddleton.com/sitemap.xml`
 5. **Request indexing** → URL Inspection → enter each page URL → Request Indexing
 
-### Update External Listings
-
-- **Psychology Today** — update website URL to `https://www.taylermiddleton.com` if it still points to Wix
-- **Google Business Profile** — ensure the practice is listed and website URL is updated
-- **Jane App** — verify booking link is correct (`https://colenmiddletontherapy.janeapp.com/locations/tayler-middleton/book`)
-- **Ensure consistent NAP** — name, address, phone must match exactly across all listings
-
 ### Google Maps Embed
 
 The current embed uses a search query URL. For a more reliable embed:
 1. Go to [Google Maps](https://maps.google.com) → search "554 Palmerston Ave, Toronto"
 2. Click Share → Embed a map → copy the iframe `src` URL
-3. Replace the `src` in all 4 pages + `thanks.html`
+3. Replace the `src` in all pages that have the map (`index.html`, `about.html`, `faq.html`, `contact.html`)
+
+### Update External Listings
+
+Update the website URL on all external profiles to `https://www.taylermiddleton.com`:
+
+- **Psychology Today** — update website URL in your therapist profile
+- **Google Business Profile** — ensure the practice is listed at [business.google.com](https://business.google.com) and the website URL is updated
+- **Jane App** — verify booking link is correct (`https://colenmiddletontherapy.janeapp.com/locations/tayler-middleton/book`)
+- **Lumino Health** — update if listed
+- **Any other directories** (Wix site can be deactivated after the new site is live and indexed)
+
+### Ensure Consistent NAP
+
+NAP (Name, Address, Phone) must match **exactly** across all listings for local SEO:
+
+| Field | Value |
+|-------|-------|
+| Name | Tayler Middleton Therapy |
+| Address | 554 Palmerston Avenue, Suite #3, Toronto, ON, M6G 2P7 |
+| Phone | 437-557-3403 |
+| Email | info@taylermiddleton.com |
+
+Verify this is identical on:
+- This website (footer on every page)
+- Google Business Profile
+- Psychology Today
+- Jane App booking page
+- Any other directory listings
