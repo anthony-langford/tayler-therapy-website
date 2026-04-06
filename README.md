@@ -30,6 +30,17 @@ Push to `main` — GitHub Pages deploys automatically.
 
 ## TODO
 
+### Re-add CNAME File
+
+The `CNAME` file was removed to allow previewing via `https://anthony-langford.github.io/tayler-therapy-website/`. When ready to use the custom domain:
+
+1. Create a `CNAME` file in the repo root containing:
+   ```
+   www.taylermiddleton.com
+   ```
+2. Commit and push
+3. Then configure DNS (below)
+
 ### Configure DNS
 
 Update DNS records at your domain registrar to point to GitHub Pages:
