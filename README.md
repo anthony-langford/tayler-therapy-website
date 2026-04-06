@@ -152,3 +152,14 @@ Verify this is identical on:
 - Psychology Today
 - Jane App booking page
 - Any other directory listings
+
+### Validate Structured Data
+
+After the site is live, validate the JSON-LD schemas:
+1. [Google Rich Results Test](https://search.google.com/test/rich-results) — paste each page URL, confirm no errors
+2. [Schema.org Validator](https://validator.schema.org/) — verify JSON-LD is well-formed
+3. Check that FAQ page shows as eligible for rich results (expandable FAQ dropdowns in search)
+
+### Get Google Reviews
+
+Ask clients to leave reviews on the Google Business Profile. Review quantity and quality heavily influence local search rankings. This is one of the highest-impact ongoing SEO activities for a local practice.
