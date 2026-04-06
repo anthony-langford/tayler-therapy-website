@@ -38,16 +38,17 @@
 
   <link rel="stylesheet" href="styles.css">
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD: Business -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": ["ProfessionalService", "MedicalBusiness"],
     "name": "Tayler Middleton Therapy",
-    "description": "Registered Social Worker providing therapy for teens, adults, couples, and families in Toronto.",
+    "description": "Registered Social Worker providing therapy for teens, adults, couples, and families in Toronto. Specializing in anxiety, depression, trauma, family conflict, and relationship issues.",
     "url": "https://www.taylermiddleton.com",
     "telephone": "+1-437-557-3403",
     "email": "info@taylermiddleton.com",
+    "image": "https://www.taylermiddleton.com/images/og-image.jpg",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "554 Palmerston Avenue, Suite #3",
@@ -61,8 +62,54 @@
       "latitude": 43.6622,
       "longitude": -79.4207
     },
+    "areaServed": [
+      { "@type": "City", "name": "Toronto" },
+      { "@type": "State", "name": "Ontario" }
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Professional License",
+        "name": "Registered Social Worker (RSW)",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "Ontario College of Social Workers and Social Service Workers"
+        }
+      }
+    ],
+    "knowsAbout": [
+      "Anxiety", "Depression", "Trauma", "Family Conflict",
+      "Relationship Issues", "Grief", "Self-Esteem", "Stress",
+      "Communication Challenges", "Anger", "ADHD", "Couples Therapy"
+    ],
+    "availableService": [
+      { "@type": "MedicalTherapy", "name": "Individual Therapy" },
+      { "@type": "MedicalTherapy", "name": "Couples Therapy" },
+      { "@type": "MedicalTherapy", "name": "Family Therapy" }
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
     "priceRange": "$$",
-    "openingHours": "Mo-Fr 09:00-17:00"
+    "paymentAccepted": "Credit Card, Debit Card",
+    "currenciesAccepted": "CAD"
+  }
+  </script>
+
+  <!-- JSON-LD: Breadcrumb -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.taylermiddleton.com/"
+    }]
   }
   </script>
 </head>
