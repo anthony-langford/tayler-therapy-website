@@ -62,26 +62,6 @@ After DNS propagates (can take up to 48 hours):
 1. Go to repo Settings → Pages → Custom domain → enter `www.taylermiddleton.com`
 2. Check "Enforce HTTPS"
 
-### Configure Web3Forms
-
-1. Go to [web3forms.com](https://web3forms.com) dashboard
-2. **Verify `info@taylermiddleton.com`** — Web3Forms sends a verification email to confirm the address
-3. **Update the recipient email** to `info@taylermiddleton.com` so form submissions go to the practice inbox (not your personal email)
-4. Test the form on the live site to confirm submissions arrive
-
-### Fix Psychology Today Embed
-
-The current badge uses a partial SVG that only shows the checkmark and "VERIFIED BY" text. To get the full badge with the "Psychology Today" wordmark:
-
-1. Log in to the [Psychology Today member portal](https://member.psychologytoday.com/)
-2. Find the **verification badge** or **website widget** section
-3. Copy the full embed code — it will look like:
-   ```html
-   <a href="https://www.psychologytoday.com/profile/1148224" class="sx-verified-seal"></a>
-   <script type="text/javascript" src="https://member.psychologytoday.com/verified-seal.js" data-badge="16" data-id="1148224" data-code="YOUR_CODE"></script>
-   ```
-4. Replace the `<div class="footer__badge">` contents in all pages (`index.html`, `about.html`, `faq.html`, `contact.html`, `thanks.html`) with the full embed code
-
 ### Replace Placeholder Images
 
 Save these images from the current Wix site to `images/`:
@@ -104,15 +84,6 @@ After adding images, update the CSS and HTML to use local paths instead of Unspl
 
 **Optimize images** before committing — resize to max 1600px wide, compress with [squoosh.app](https://squoosh.app/) or similar.
 
-### Add Favicon
-
-1. Create or obtain a logo/icon
-2. Generate favicon files at [favicon.io](https://favicon.io/)
-3. Add to the project:
-   - `favicon.ico` (root)
-   - `images/favicon.svg`
-   - `images/apple-touch-icon.png` (180x180px)
-
 ### Add Social Sharing Image
 
 Create `images/og-image.jpg` (1200x630px recommended). This image appears when the site is shared on Facebook, LinkedIn, Twitter, etc. A simple option: the hero image with "Tayler Middleton Therapy" text overlaid.
@@ -128,13 +99,6 @@ Create `images/og-image.jpg` (1200x630px recommended). This image appears when t
    Add this tag to the `<head>` of every page, commit, and push
 4. **Submit sitemap** → Sitemaps → enter `https://www.taylermiddleton.com/sitemap.xml`
 5. **Request indexing** → URL Inspection → enter each page URL → Request Indexing
-
-### Google Maps Embed
-
-The current embed uses a search query URL. For a more reliable embed:
-1. Go to [Google Maps](https://maps.google.com) → search "554 Palmerston Ave, Toronto"
-2. Click Share → Embed a map → copy the iframe `src` URL
-3. Replace the `src` in all pages that have the map (`index.html`, `about.html`, `faq.html`, `contact.html`)
 
 ### Update External Listings
 
