@@ -34,6 +34,20 @@ Push to `main` — GitHub Pages deploys automatically.
 
 The site currently shows a "Coming Soon" page at `index.html`. The full home page is preserved at `index-full.html`. To launch the full site:
 
+#### What's in the construction page (all gets replaced by step 1)
+
+The current `index.html` is self-contained — running `mv index-full.html index.html` overwrites all of the following in one shot:
+
+- "Coming Soon" `<main>` section with contact card (email, phone) and Psychology Today badge
+- Inline `<style>` block (the `.construction__*` classes + a scoped `.footer__inner` override that centers the single-column footer)
+- Open Graph + meta description copy that mentions "new site coming soon"
+- Google Maps embed (also present in `index-full.html`, so this carries over)
+- JSON-LD `ProfessionalService` schema (also present in `index-full.html`)
+
+No manual cleanup of inline styles or extra sections is needed — the `mv` is a full file replacement.
+
+#### Steps
+
 1. **Replace the index page** with the full home page:
    ```sh
    mv index-full.html index.html
@@ -58,18 +72,26 @@ The site currently shows a "Coming Soon" page at `index.html`. The full home pag
    </urlset>
    ```
 
-4. **Commit and push**:
+4. **Verify nothing references `index-full.html`** after the rename:
+   ```sh
+   grep -rn "index-full" .
+   ```
+   Should return no results. If anything matches (e.g. a stray link), fix it before deploying.
+
+5. **Commit and push**:
    ```sh
    git add -A
    git commit -m "Launch full site"
    git push origin main
    ```
 
-5. **Resubmit sitemap to Google Search Console** so all pages get indexed (URL Inspection → Request Indexing for each page).
+6. **Resubmit sitemap to Google Search Console** so all pages get indexed (URL Inspection → Request Indexing for each page).
 
-### Configure DNS
+> **Note:** The shared `.hero__title` / `.hero__subtitle` styles in `styles.css` were updated to white with a text-shadow (and the hero overlay darkened to a subtle gradient) for contrast over the mountain background. This applies site-wide — no action needed at launch, but be aware the look has changed from the original.
 
-Update DNS records at your domain registrar to point to GitHub Pages:
+### Configure DNS ✅
+
+DNS has been configured at Squarespace to point to GitHub Pages:
 
 **A records** for `taylermiddleton.com`:
 ```
@@ -84,9 +106,11 @@ Update DNS records at your domain registrar to point to GitHub Pages:
 anthony-langford.github.io
 ```
 
-After DNS propagates (can take up to 48 hours):
+Propagation can take up to 48 hours. Once it completes:
 1. Go to repo Settings → Pages → Custom domain → enter `www.taylermiddleton.com`
-2. Check "Enforce HTTPS"
+2. Check "Enforce HTTPS" (may take a few more minutes after the domain is set for the cert to be issued)
+3. Verify https://www.taylermiddleton.com loads the construction page
+4. Verify https://taylermiddleton.com redirects to the `www` version
 
 ### Replace Placeholder Images
 
