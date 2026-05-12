@@ -1,4 +1,9 @@
 User-agent: *
-Allow: /
+Allow: /$
+Disallow: /about.html
+Disallow: /faq.html
+Disallow: /contact.html
+Disallow: /thanks.html
+Disallow: /index-full.html
 
 Sitemap: https://www.taylermiddleton.com/sitemap.xml

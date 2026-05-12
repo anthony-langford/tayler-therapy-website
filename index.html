@@ -6,7 +6,7 @@
     <title>Tayler Middleton Therapy | Therapist in Toronto, ON</title>
     <meta
       name="description"
-      content="Tayler Middleton is a Registered Social Worker providing therapy for teens, adults, couples, and families in Toronto, ON. Virtual and in-person sessions available."
+      content="Tayler Middleton is a Registered Social Worker providing therapy for teens, adults, couples, and families in Toronto, ON. New site coming soon — contact us by email or phone."
     />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.taylermiddleton.com/" />
@@ -18,41 +18,17 @@
     />
     <meta
       property="og:description"
-      content="Registered Social Worker providing therapy for teens, adults, couples, and families in Toronto, ON."
+      content="Registered Social Worker providing therapy in Toronto. New site coming soon — contact us by email or phone."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.taylermiddleton.com/" />
-    <meta
-      property="og:image"
-      content="https://www.taylermiddleton.com/images/og-image.jpg"
-    />
     <meta property="og:locale" content="en_CA" />
     <meta property="og:site_name" content="Tayler Middleton Therapy" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
-    <meta
-      name="twitter:title"
-      content="Tayler Middleton Therapy | Therapist in Toronto, ON"
-    />
-    <meta
-      name="twitter:description"
-      content="Registered Social Worker providing therapy for teens, adults, couples, and families in Toronto, ON."
-    />
-    <meta
-      name="twitter:image"
-      content="https://www.taylermiddleton.com/images/og-image.jpg"
-    />
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-
-    <meta
-      name="keywords"
-      content="therapist, therapy, Toronto, psychotherapy, social worker, MSW, RSW, couples therapy, family therapy, anxiety, depression, trauma"
-    />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -64,170 +40,116 @@
 
     <link rel="stylesheet" href="styles.css" />
 
-    <!-- JSON-LD: Business -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": ["ProfessionalService", "MedicalBusiness"],
-        "name": "Tayler Middleton Therapy",
-        "description": "Registered Social Worker providing therapy for teens, adults, couples, and families in Toronto. Specializing in anxiety, depression, trauma, family conflict, and relationship issues.",
-        "url": "https://www.taylermiddleton.com",
-        "telephone": "+1-437-557-3403",
-        "email": "info@taylermiddleton.com",
-        "image": "https://www.taylermiddleton.com/images/og-image.jpg",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "554 Palmerston Avenue, Suite #3",
-          "addressLocality": "Toronto",
-          "addressRegion": "ON",
-          "postalCode": "M6G 2P7",
-          "addressCountry": "CA"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 43.6622,
-          "longitude": -79.4207
-        },
-        "areaServed": [
-          { "@type": "City", "name": "Toronto" },
-          { "@type": "State", "name": "Ontario" }
-        ],
-        "hasCredential": [
-          {
-            "@type": "EducationalOccupationalCredential",
-            "credentialCategory": "Professional License",
-            "name": "Registered Social Worker (RSW)",
-            "recognizedBy": {
-              "@type": "Organization",
-              "name": "Ontario College of Social Workers and Social Service Workers"
-            }
-          }
-        ],
-        "knowsAbout": [
-          "Anxiety",
-          "Depression",
-          "Trauma",
-          "Family Conflict",
-          "Relationship Issues",
-          "Grief",
-          "Self-Esteem",
-          "Stress",
-          "Communication Challenges",
-          "Anger",
-          "ADHD",
-          "Couples Therapy"
-        ],
-        "availableService": [
-          { "@type": "MedicalTherapy", "name": "Individual Therapy" },
-          { "@type": "MedicalTherapy", "name": "Couples Therapy" },
-          { "@type": "MedicalTherapy", "name": "Family Therapy" }
-        ],
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:00",
-          "closes": "17:00"
-        },
-        "priceRange": "$$",
-        "paymentAccepted": "Credit Card, Debit Card",
-        "currenciesAccepted": "CAD"
+    <style>
+      .construction {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        text-align: center;
       }
-    </script>
 
-    <!-- JSON-LD: Breadcrumb -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.taylermiddleton.com/"
-          }
-        ]
+      .construction__message {
+        font-size: 1rem;
+        line-height: 1.85;
+        margin-bottom: 2rem;
+        color: var(--text);
       }
-    </script>
+
+      .construction__contact {
+        background: var(--tan-light);
+        padding: 2rem 2.5rem;
+        margin: 2rem auto;
+        max-width: 480px;
+      }
+
+      .construction__contact-heading {
+        font-family: var(--font-accent);
+        font-style: italic;
+        color: var(--gold);
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+      }
+
+      .construction__contact p {
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      .construction__contact a {
+        color: var(--text-dark);
+        font-weight: 500;
+      }
+
+      .construction__contact a:hover {
+        color: var(--gold);
+      }
+
+      .construction__divider {
+        width: 80px;
+        height: 2px;
+        background: var(--gold);
+        margin: 1.5rem auto;
+      }
+
+      .construction__badge {
+        margin-top: 2.5rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      @media (max-width: 480px) {
+        .construction__contact {
+          padding: 1.5rem 1.25rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Hero -->
     <header class="hero">
-      <nav class="nav">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
-      </nav>
       <h1 class="hero__title">Tayler Middleton Therapy</h1>
       <p class="hero__subtitle">MSW, RSW</p>
     </header>
 
-    <!-- Welcome -->
-    <section class="section">
-      <h2 class="accent-heading accent-heading--large">Welcome</h2>
-      <div class="welcome">
-        <p>
-          My name is Tayler (she/her), and I provide therapy for teens, adults,
-          couples, parents, and families, supporting clients navigating
-          relationship stress, family conflict, communication challenges,
-          anxiety, anger, low mood, stress, and overwhelm.
+    <!-- Under Construction -->
+    <main class="section">
+      <h2 class="accent-heading accent-heading--large">Coming Soon</h2>
+      <div class="construction">
+        <p class="construction__message">
+          A new website is on the way. In the meantime, please feel free to reach
+          out directly by email or phone to schedule a free 15-minute
+          consultation.
         </p>
-        <p>
-          I am a Registered Social Worker with a Master of Social Work from the
-          University of Toronto, and I work with people all over Ontario, both
-          virtually and in-person at my office in downtown Toronto.
-        </p>
-        <p>
-          To learn more, ask questions, and get a sense of if we are a good
-          match, reach out below and we can schedule a call.
-        </p>
-      </div>
-    </section>
 
-    <!-- Reach Out -->
-    <section class="section section--alt">
-      <div class="reach-out">
-        <div class="reach-out__content">
-          <h2 class="reach-out__heading">Reach Out</h2>
-          <div class="reach-out__divider"></div>
-          <p class="reach-out__text">
-            Send me a message through the link below to schedule a free call.
+        <div class="construction__divider"></div>
+
+        <div class="construction__contact">
+          <h3 class="construction__contact-heading">Get In Touch</h3>
+          <p>
+            <a href="mailto:info@taylermiddleton.com">info@taylermiddleton.com</a>
           </p>
-          <a href="contact.html" class="btn"
-            >Schedule a consultation &rsaquo;</a
-          >
-          <div class="reach-out__contact">
-            <p>
-              Email:
-              <a href="mailto:info@taylermiddleton.com"
-                >info@taylermiddleton.com</a
-              >
-            </p>
-            <p>Phone: <a href="tel:+14375573403">437-557-3403</a></p>
-          </div>
+          <p>
+            <a href="tel:+14375573403">437-557-3403</a>
+          </p>
         </div>
-        <div class="reach-out__image">
-          <img
-            src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80"
-            alt="Tayler Middleton, therapist"
-            loading="lazy"
-          />
+
+        <div class="construction__badge">
+          <a
+            href="https://www.psychologytoday.com/profile/1148224"
+            class="sx-verified-seal"
+            target="_blank"
+            rel="noopener noreferrer"
+          ></a>
+          <script
+            type="text/javascript"
+            src="https://member.psychologytoday.com/verified-seal.js"
+            data-badge="13"
+            data-id="1148224"
+            data-code="aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy8xMy9wcm9maWxlLzExNDgyMjQ/Y2FsbGJhY2s9c3hjYWxsYmFjaw=="
+          ></script>
         </div>
       </div>
-    </section>
-
-    <!-- Map -->
-    <section class="map-section">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.1937141005374!2d-79.4139675!3d43.66494089999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b35f83b1c4709%3A0xabb720aa026a44e3!2sTayler%20Middleton%20Therapy!5e0!3m2!1sen!2sca!4v1775487403018!5m2!1sen!2sca"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Office location - 554 Palmerston Ave, Toronto"
-      >
-      </iframe>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -245,28 +167,46 @@
           <p>C: <a href="tel:+14375573403">437-557-3403</a></p>
           <p>Registration Number: 847907</p>
         </div>
-        <nav class="footer__nav">
-          <a href="index.html" class="active">Home</a>
-          <a href="about.html">About</a>
-          <a href="faq.html">FAQ</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-        <div class="footer__badge">
-          <!-- Professional verification provided by Psychology Today -->
-          <a
-            href="https://www.psychologytoday.com/profile/1148224"
-            class="sx-verified-seal"
-          ></a>
-          <script
-            type="text/javascript"
-            src="https://member.psychologytoday.com/verified-seal.js"
-            data-badge="13"
-            data-id="1148224"
-            data-code="aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy8xMy9wcm9maWxlLzExNDgyMjQ/Y2FsbGJhY2s9c3hjYWxsYmFjaw=="
-          ></script>
-          <!-- End Verification -->
-        </div>
       </div>
     </footer>
+
+    <!-- JSON-LD: Business -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["ProfessionalService", "MedicalBusiness"],
+        "name": "Tayler Middleton Therapy",
+        "description": "Registered Social Worker providing therapy for teens, adults, couples, and families in Toronto.",
+        "url": "https://www.taylermiddleton.com",
+        "telephone": "+1-437-557-3403",
+        "email": "info@taylermiddleton.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "554 Palmerston Avenue, Suite #3",
+          "addressLocality": "Toronto",
+          "addressRegion": "ON",
+          "postalCode": "M6G 2P7",
+          "addressCountry": "CA"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 43.6622,
+          "longitude": -79.4207
+        },
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      }
+    </script>
   </body>
 </html>
