@@ -30,16 +30,42 @@ Push to `main` — GitHub Pages deploys automatically.
 
 ## TODO
 
-### Re-add CNAME File
+### Launch the Full Site (Remove Under Construction Page)
 
-The `CNAME` file was removed to allow previewing via `https://anthony-langford.github.io/tayler-therapy-website/`. When ready to use the custom domain:
+The site currently shows a "Coming Soon" page at `index.html`. The full home page is preserved at `index-full.html`. To launch the full site:
 
-1. Create a `CNAME` file in the repo root containing:
+1. **Replace the index page** with the full home page:
+   ```sh
+   mv index-full.html index.html
    ```
-   www.taylermiddleton.com
+
+2. **Restore `robots.txt`** to allow all pages:
    ```
-2. Commit and push
-3. Then configure DNS (below)
+   User-agent: *
+   Allow: /
+
+   Sitemap: https://www.taylermiddleton.com/sitemap.xml
+   ```
+
+3. **Restore `sitemap.xml`** to list all pages:
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+     <url><loc>https://www.taylermiddleton.com/</loc><priority>1.0</priority></url>
+     <url><loc>https://www.taylermiddleton.com/about.html</loc><priority>0.8</priority></url>
+     <url><loc>https://www.taylermiddleton.com/faq.html</loc><priority>0.7</priority></url>
+     <url><loc>https://www.taylermiddleton.com/contact.html</loc><priority>0.9</priority></url>
+   </urlset>
+   ```
+
+4. **Commit and push**:
+   ```sh
+   git add -A
+   git commit -m "Launch full site"
+   git push origin main
+   ```
+
+5. **Resubmit sitemap to Google Search Console** so all pages get indexed (URL Inspection → Request Indexing for each page).
 
 ### Configure DNS
 
