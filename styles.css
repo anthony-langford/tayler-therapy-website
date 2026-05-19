@@ -117,7 +117,7 @@ h1, h2, h3 {
 
 .hero {
   position: relative;
-  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=80');
+  background-image: url('images/hero.avif');
   background-size: cover;
   background-position: center 40%;
   padding: 0.75rem 0 3rem;
@@ -393,7 +393,7 @@ h1, h2, h3 {
 .approach {
   position: relative;
   min-height: 500px;
-  background-image: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1600&q=80');
+  background-image: url('images/office-approach.avif');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -630,7 +630,7 @@ h1, h2, h3 {
 
 .contact-hero__image {
   position: relative;
-  background-image: url('https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=1400&q=80');
+  background-image: url('images/plant-blurry.avif');
   background-size: cover;
   background-position: center;
   display: flex;

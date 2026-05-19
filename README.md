@@ -9,6 +9,7 @@ Static website for [taylermiddleton.com](https://www.taylermiddleton.com) — a 
 - **FAQ** (`faq.html`) — Session fees, sliding scale, scheduling
 - **Contact** (`contact.html`) — Contact form (Web3Forms), office photos
 - **Thank You** (`thanks.html`) — Post-submission redirect
+- **Under Construction** (`index-under-construction.html`) — Preserved fallback page (excluded from indexing via `robots.txt`); see [Under Construction Fallback](#under-construction-fallback) below
 
 ## Tech Stack
 
@@ -26,117 +27,102 @@ Open any HTML file directly in a browser. No server or build step required.
 
 Push to `main` — GitHub Pages deploys automatically.
 
+## Under Construction Fallback
+
+The original "Coming Soon" page is preserved at `index-under-construction.html`. It's a self-contained file (inline styles, contact card, Psychology Today badge, Google Maps embed, scoped footer override) and is blocked from indexing by `robots.txt`.
+
+**If you ever need to revert the site to construction mode** (planned downtime, content rewrite, etc.):
+
+1. Swap the files:
+   ```sh
+   git mv index.html index-full.html
+   git mv index-under-construction.html index.html
+   ```
+2. Update `robots.txt` to disallow `about.html`, `faq.html`, `contact.html`, `thanks.html`, `index-full.html` and only allow `/$` (root). The previous construction-mode `robots.txt` is in git history if you need it.
+3. Reduce `sitemap.xml` to only the root URL.
+4. Commit and push.
+
+To restore the full site, do the reverse — swap names back, restore the full `robots.txt`/`sitemap.xml` (see current versions in this repo as the reference state).
+
 ---
 
-## TODO
+## ✅ Completed Setup
 
-### Launch the Full Site (Remove Under Construction Page)
+The site is **live**. The following work is done:
 
-The site currently shows a "Coming Soon" page at `index.html`. The full home page is preserved at `index-full.html`. To launch the full site:
+### ✅ DNS configured
 
-#### What's in the construction page (all gets replaced by step 1)
+DNS records at Squarespace point to GitHub Pages.
 
-The current `index.html` is self-contained — running `mv index-full.html index.html` overwrites all of the following in one shot:
+- **A records** for `taylermiddleton.com`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+- **CNAME** for `www` → `anthony-langford.github.io`
+- Custom domain `www.taylermiddleton.com` is saved in repo Settings → Pages
+- HTTPS is enforced (Let's Encrypt cert via GitHub Pages)
+- Apex `taylermiddleton.com` redirects to `https://www.taylermiddleton.com`
 
-- "Coming Soon" `<main>` section with contact card (email, phone) and Psychology Today badge
-- Inline `<style>` block (the `.construction__*` classes + a scoped `.footer__inner` override that centers the single-column footer)
-- Open Graph + meta description copy that mentions "new site coming soon"
-- Google Maps embed (also present in `index-full.html`, so this carries over)
-- JSON-LD `ProfessionalService` schema (also present in `index-full.html`)
+### ✅ Site images (AVIF)
 
-No manual cleanup of inline styles or extra sections is needed — the `mv` is a full file replacement.
-
-#### Steps
-
-1. **Replace the index page** with the full home page:
-   ```sh
-   mv index-full.html index.html
-   ```
-
-2. **Restore `robots.txt`** to allow all pages:
-   ```
-   User-agent: *
-   Allow: /
-
-   Sitemap: https://www.taylermiddleton.com/sitemap.xml
-   ```
-
-3. **Restore `sitemap.xml`** to list all pages:
-   ```xml
-   <?xml version="1.0" encoding="UTF-8"?>
-   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     <url><loc>https://www.taylermiddleton.com/</loc><priority>1.0</priority></url>
-     <url><loc>https://www.taylermiddleton.com/about.html</loc><priority>0.8</priority></url>
-     <url><loc>https://www.taylermiddleton.com/faq.html</loc><priority>0.7</priority></url>
-     <url><loc>https://www.taylermiddleton.com/contact.html</loc><priority>0.9</priority></url>
-   </urlset>
-   ```
-
-4. **Verify nothing references `index-full.html`** after the rename:
-   ```sh
-   grep -rn "index-full" .
-   ```
-   Should return no results. If anything matches (e.g. a stray link), fix it before deploying.
-
-5. **Commit and push**:
-   ```sh
-   git add -A
-   git commit -m "Launch full site"
-   git push origin main
-   ```
-
-6. **Resubmit sitemap to Google Search Console** so all pages get indexed (URL Inspection → Request Indexing for each page).
-
-> **Note:** The shared `.hero__title` / `.hero__subtitle` styles in `styles.css` were updated to white with a text-shadow (and the hero overlay darkened to a subtle gradient) for contrast over the mountain background. This applies site-wide — no action needed at launch, but be aware the look has changed from the original.
-
-### Configure DNS ✅
-
-DNS has been configured at Squarespace to point to GitHub Pages:
-
-**A records** for `taylermiddleton.com`:
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
-
-**CNAME** for `www`:
-```
-anthony-langford.github.io
-```
-
-Propagation can take up to 48 hours. Once it completes:
-1. Go to repo Settings → Pages → Custom domain → enter `www.taylermiddleton.com`
-2. Check "Enforce HTTPS" (may take a few more minutes after the domain is set for the cert to be issued)
-3. Verify https://www.taylermiddleton.com loads the construction page
-4. Verify https://taylermiddleton.com redirects to the `www` version
-
-### Replace Placeholder Images
-
-Save these images from the current Wix site to `images/`:
+All site images live in `images/` as AVIF. AVIF gives ~5–10× smaller files than JPG at equivalent quality and is supported by all modern browsers (Chrome 85+, Firefox 93+, Safari 16+) — total weight for all 9 images is ~536 KB.
 
 | Filename | Description | Used On |
 |----------|-------------|---------|
-| `hero.jpg` | Mountain landscape banner | All pages (hero) |
-| `tayler-home.jpg` | Tayler's portrait | Home (Reach Out) |
-| `tayler-about.jpg` | Tayler's portrait | About (About Me) |
-| `office-approach.jpg` | Therapy room interior | About (My Approach background) |
-| `office-couch.jpg` | Office couch/pillows | FAQ (Get In Touch) |
-| `flowers.jpg` | Cherry blossoms | About (Education) |
-| `plant-blurry.jpg` | Blurry plant/leaves | Contact (left background) |
-| `office-interior.jpg` | Office room | Contact (bottom left photo) |
-| `plant.jpg` | Rubber plant | Contact (bottom right photo) |
+| `hero.avif` | Mountain landscape banner | All pages (hero, via `styles.css` `.hero`) |
+| `tayler-home.avif` | Tayler in cardigan | Home (Reach Out) — `index.html` |
+| `tayler-about.avif` | Tayler in blazer | About (About Me) — `about.html` |
+| `office-approach.avif` | Therapy room (wide) | About (My Approach background, via `styles.css` `.approach`) |
+| `office-couch.avif` | Couch close-up | FAQ (Get In Touch) — `faq.html` |
+| `flowers.avif` | White spring blossoms | About (Education) — `about.html` |
+| `plant-blurry.avif` | Soft plant shadow | Contact (left background, via `styles.css` `.contact-hero__image`) |
+| `office-interior.avif` | Office with bookshelf and lamp | Contact (bottom-left photo) — `contact.html` |
+| `plant.avif` | Rubber plant | Contact (bottom-right photo) — `contact.html` |
 
-After adding images, update the CSS and HTML to use local paths instead of Unsplash URLs:
-- `styles.css` — replace Unsplash URLs in `.hero` and `.approach` background-image
-- HTML files — replace `https://images.unsplash.com/...` `src` attributes with `images/filename.jpg`
+**Replacing an image:** drop the new file at the same path with the same name and commit. Keep AVIF format and aim for files under ~200 KB. To convert from JPG/PNG, use [squoosh.app](https://squoosh.app/) (effort: max, quality: 50–60).
 
-**Optimize images** before committing — resize to max 1600px wide, compress with [squoosh.app](https://squoosh.app/) or similar.
+### ✅ Social sharing image (`og-image.jpg`)
 
-### Add Social Sharing Image
+`images/og-image.jpg` (1200×630, ~75 KB JPG) appears when the site is shared on Facebook, LinkedIn, X, iMessage, Slack, etc. It uses Tayler's home-page headshot on a cream background with the practice name in Playfair Display, a gold accent line, MSW/RSW credentials, and a "Therapy in Toronto" tagline.
 
-Create `images/og-image.jpg` (1200x630px recommended). This image appears when the site is shared on Facebook, LinkedIn, Twitter, etc. A simple option: the hero image with "Tayler Middleton Therapy" text overlaid.
+**Why JPG instead of AVIF here:** social platforms still expect JPG/PNG for `og:image` — many don't reliably parse AVIF for preview cards. JPG is the safe universal format for this single file.
+
+The file is referenced from `index.html` in three places (Open Graph `og:image`, Twitter `twitter:image`, and JSON-LD `image`).
+
+**Regenerating:** if you ever need to rebuild it, the source script is at `/tmp/og-build.py` (uses Pillow + Playfair Display from Google Fonts); save a copy somewhere durable before that tmp file is wiped. To preview how it looks on real platforms after pushing, use [opengraph.xyz](https://www.opengraph.xyz/) or paste the URL into [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/).
+
+### ✅ Hero title contrast
+
+The shared `.hero__title` / `.hero__subtitle` styles in `styles.css` are white with a text-shadow, and the hero overlay is a subtle dark gradient — together this gives the title proper contrast over the mountain background image on every page.
+
+### ✅ `robots.txt` — allow all pages
+
+```
+User-agent: *
+Allow: /
+Disallow: /index-under-construction.html
+
+Sitemap: https://www.taylermiddleton.com/sitemap.xml
+```
+
+The construction fallback page is the only path excluded from crawling.
+
+### ✅ `sitemap.xml` — all four pages
+
+Lists `/`, `/about.html`, `/faq.html`, `/contact.html` with appropriate priorities.
+
+### ✅ Contact form
+
+Web3Forms is configured to deliver submissions to `info@taylermiddleton.com`. After successful submission users are redirected to `thanks.html`.
+
+### ✅ Psychology Today badge
+
+The verified seal is embedded on the home page (Reach Out section).
+
+### ✅ Favicons
+
+Standard `.ico`, SVG, and Apple Touch icon variants in `/images/` and at root.
+
+---
+
+## Remaining TODOs
 
 ### Google Search Console
 
@@ -146,7 +132,7 @@ Create `images/og-image.jpg` (1200x630px recommended). This image appears when t
    ```html
    <meta name="google-site-verification" content="your-code-here">
    ```
-   Add this tag to the `<head>` of every page, commit, and push
+   Add this tag to the `<head>` of `index.html` (and ideally `about.html`, `faq.html`, `contact.html` too), commit, and push.
 4. **Submit sitemap** → Sitemaps → enter `https://www.taylermiddleton.com/sitemap.xml`
 5. **Request indexing** → URL Inspection → enter each page URL → Request Indexing
 
@@ -158,7 +144,7 @@ Update the website URL on all external profiles to `https://www.taylermiddleton.
 - **Google Business Profile** — ensure the practice is listed at [business.google.com](https://business.google.com) and the website URL is updated
 - **Jane App** — verify booking link is correct (`https://colenmiddletontherapy.janeapp.com/locations/tayler-middleton/book`)
 - **Lumino Health** — update if listed
-- **Any other directories** (Wix site can be deactivated after the new site is live and indexed)
+- **Any other directories** — the Wix site can be deactivated once the new site is live and indexed
 
 ### Ensure Consistent NAP
 
