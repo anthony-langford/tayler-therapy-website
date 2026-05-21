@@ -9,9 +9,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Raleway:wght@300;400;500;600&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Raleway:wght@300;400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Raleway:wght@300;400;500;600&display=swap"
+      />
+    </noscript>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -26,6 +34,7 @@
       <p class="hero__subtitle">MSW, RSW</p>
     </header>
 
+    <main>
     <section
       class="section"
       style="
@@ -47,20 +56,21 @@
         </p>
       </div>
     </section>
+    </main>
 
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__info">
-          <h4>Tayler Middleton Therapy</h4>
+          <h3>Tayler Middleton Therapy</h3>
           <p>554 Palmerston Avenue, Suite #3</p>
           <p>Toronto, ON, M6G 2P7</p>
           <p>
-            E:
+            Email:
             <a href="mailto:info@taylermiddleton.com"
               >info@taylermiddleton.com</a
             >
           </p>
-          <p>C: <a href="tel:+14375573403">437-557-3403</a></p>
+          <p>Phone: <a href="tel:+14375573403">437-557-3403</a></p>
           <p>Registration Number: 847907</p>
         </div>
         <nav class="footer__nav">
@@ -74,6 +84,7 @@
           <a
             href="https://www.psychologytoday.com/profile/1148224"
             class="sx-verified-seal"
+            aria-label="Verified by Psychology Today"
           ></a>
           <script
             type="text/javascript"
