@@ -30,6 +30,15 @@
     <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 
+    <!-- LCP optimization: preload the hero image -->
+    <link
+      rel="preload"
+      as="image"
+      href="images/hero.avif"
+      type="image/avif"
+      fetchpriority="high"
+    />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -160,6 +169,7 @@
           ></a>
           <script
             type="text/javascript"
+            defer
             src="https://member.psychologytoday.com/verified-seal.js"
             data-badge="13"
             data-id="1148224"

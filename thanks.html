@@ -6,6 +6,15 @@
     <title>Thank You | Tayler Middleton Therapy</title>
     <meta name="robots" content="noindex" />
 
+    <!-- LCP optimization: preload the hero image -->
+    <link
+      rel="preload"
+      as="image"
+      href="images/hero.avif"
+      type="image/avif"
+      fetchpriority="high"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -88,6 +97,7 @@
           ></a>
           <script
             type="text/javascript"
+            defer
             src="https://member.psychologytoday.com/verified-seal.js"
             data-badge="13"
             data-id="1148224"
