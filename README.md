@@ -14,10 +14,11 @@ Static website for [taylermiddleton.com](https://www.taylermiddleton.com) — a 
 ## Tech Stack
 
 - HTML5 + CSS3 (no JavaScript, no build step)
-- [Google Fonts](https://fonts.google.com/) — Playfair Display, Raleway
+- **Self-hosted** Playfair Display + Raleway WOFF2 files in `fonts/` (no Google Fonts dependency)
 - [Web3Forms](https://web3forms.com/) — Contact form submissions
 - [GitHub Pages](https://pages.github.com/) — Hosting
 - Google Maps Embed — Office location
+- Psychology Today verified-seal widget (deferred so it doesn't block render)
 
 ## Local Development
 
@@ -58,7 +59,7 @@ DNS records at Squarespace point to GitHub Pages.
 - **CNAME** for `www` → `anthony-langford.github.io`
 - Custom domain `www.taylermiddleton.com` is saved in repo Settings → Pages
 - HTTPS is enforced (Let's Encrypt cert via GitHub Pages)
-- Apex `taylermiddleton.com` redirects to `https://www.taylermiddleton.com`
+- Apex `taylermiddleton.com` 301-redirects to `https://www.taylermiddleton.com` — www is the canonical hostname everywhere (canonical tags, OG URLs, sitemap, JSON-LD). All external listings should also use the www variant.
 
 ### ✅ Site images (AVIF)
 
@@ -118,23 +119,69 @@ The verified seal is embedded on the home page (Reach Out section).
 
 ### ✅ Favicons
 
-Standard `.ico`, SVG, and Apple Touch icon variants in `/images/` and at root.
+The "tm" italic monogram (Playfair Display on `#c2d1cc` sage background) is available at multiple sizes so Google Search, browser tabs, and mobile home-screen shortcuts can all pick the right one:
+
+| File | Size | Used for |
+|---|---|---|
+| `favicon.ico` (root) | 16×16 + 32×32 | Legacy browsers |
+| `images/favicon.svg` | vector | Modern browsers (any size, dark-mode aware) |
+| `images/favicon-192.png` | 192×192 | Google Search results, Android home screen |
+| `images/favicon-512.png` | 512×512 | Future PWA manifest / high-DPI |
+| `images/apple-touch-icon.png` | 180×180 | iOS home screen |
+
+> **Note on Google Search favicon refresh:** Google caches favicons aggressively and only re-fetches them every 1–2 weeks. After updating, the search result icon may continue showing the previous icon (or the generic globe) for a while. You can verify what Google currently has cached by visiting `https://www.google.com/s2/favicons?sz=64&domain=taylermiddleton.com`.
+
+### ✅ Performance optimizations
+
+Mobile Lighthouse score: 92+ (median of multiple runs). Desktop: 100. Core Web Vitals: all green.
+
+- **Self-hosted fonts** — eliminates the ~750 ms Google Fonts CSS round-trip; WOFF2 files (~92 KB total) load from same-origin with `font-display: swap`
+- **Psychology Today script deferred** — `defer` attribute removes the third-party verified-seal.js from the critical render path
+- **All images use AVIF** — ~5–10× smaller than equivalent JPG; lazy-loaded where applicable
+- **Google Maps iframe lazy-loaded** — only fetched when scrolled into view
+- **No JavaScript build step** — entire site is static HTML/CSS, served straight from GitHub Pages CDN
+
+### ✅ Accessibility
+
+All pages pass WCAG AA with a 100 Lighthouse accessibility score.
+
+- **Contrast ratios** — gold accent text uses `--gold-text: #8b6b2a` (4.97:1 on white); body text uses `--text-light: #5f5f5f` (6.16:1 on white); buttons use dark text on gold for 5.25:1
+- **Heading hierarchy** — h1 → h2 → h3 with no skipped levels
+- **Semantic landmarks** — every page has `<header>`, `<nav>`, `<main>`, `<footer>` so screen readers can navigate
+- **Aria labels** — empty links (e.g., the Psychology Today badge anchor) have `aria-label` so screen readers can announce them
+- **Image alt text** — all `<img>` elements have descriptive `alt` attributes
+
+---
+
+### ✅ Google Search Console
+
+- Property verified via DNS TXT record (Domain property — covers apex, www, and any subdomain)
+- `sitemap.xml` submitted under Sitemaps
+- URL Inspection → Request Indexing run for `/`, `/about.html`, `/faq`, `/contact.html`
+
+Performance data starts populating in GSC ~3–7 days after indexing requests; revisit the Performance tab weekly for the first few months to see what queries are surfacing the site.
+
+### ✅ Legacy Wix URL redirects
+
+The previous Wix site exposed pages at non-canonical slugs that Google had indexed before the migration. To prevent users from hitting 404s when clicking those old search results and to consolidate SEO signals onto the new pages, the old slugs are now handled as follows:
+
+| Old Wix URL | Strategy | Mechanism |
+|---|---|---|
+| `/about-the-office` | 301-redirect → `/about.html` | `about-the-office.html` stub with `<meta http-equiv="refresh" content="0; url=/about.html">` |
+| `/contact-schedule` | 301-redirect → `/contact.html` | `contact-schedule.html` stub with `<meta http-equiv="refresh" content="0; url=/contact.html">` |
+| `/faq` | Adopted as the canonical URL | GitHub Pages already serves `faq.html` at both `/faq` and `/faq.html`, so the existing indexed URL keeps working. `<link rel="canonical">` in `faq.html` points at `/faq`, the sitemap lists `/faq`, and all internal nav links use `/faq`. |
+
+Google treats `<meta http-equiv="refresh" content="0; ...">` as a 301 equivalent per [their documentation](https://developers.google.com/search/docs/crawling-indexing/301-redirects#metarefresh). The redirect stubs also include `<meta name="robots" content="noindex">` so the stubs themselves don't appear in search results.
+
+**If more old Wix URLs surface later** (visible in GSC → Indexing → Pages → "Crawled - currently not indexed" or as 404s in real-user traffic), add new redirect stubs using the same pattern: a 10-line HTML file at the old slug name, with a meta refresh pointing at the new canonical URL.
+
+After the redirects deployed, the recommended GSC follow-up:
+1. (Optional) **GSC → Removals → New request** for `/about-the-office` and `/contact-schedule` to temporarily hide them while Google processes the 301s
+2. Do **not** request indexing for the new `.html` URLs again — Google already has them in its crawl queue. The redirects + canonical signals will resolve the "Crawled - not indexed" state organically over the next few crawl cycles (1–4 weeks)
 
 ---
 
 ## Remaining TODOs
-
-### Google Search Console
-
-1. Go to [search.google.com/search-console](https://search.google.com/search-console)
-2. **Add property** → URL prefix → `https://www.taylermiddleton.com`
-3. **Verify ownership** via HTML tag method — Google provides a meta tag like:
-   ```html
-   <meta name="google-site-verification" content="your-code-here">
-   ```
-   Add this tag to the `<head>` of `index.html` (and ideally `about.html`, `faq.html`, `contact.html` too), commit, and push.
-4. **Submit sitemap** → Sitemaps → enter `https://www.taylermiddleton.com/sitemap.xml`
-5. **Request indexing** → URL Inspection → enter each page URL → Request Indexing
 
 ### Update External Listings
 
